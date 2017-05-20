@@ -1,0 +1,5 @@
+
+{"type":"no type yet","front":"what is the square root of 4?","back":"2"}
+{"type":"no type yet","front":"are you smart?","back":"yes"}
+{"type":"qa","front":"this is the front","back":"this is the back qa"}
+{"type":"cloze","front":"this is the __________ statement ","back":"this is the full statement "}
