@@ -15,10 +15,11 @@ Flashcard.prototype.save = function () {
     })
 };
 
-function Flashcard(type, front, back) {
+function Flashcard(type, front, back, blank) {
     this.type = type;
     this.front = front;
     this.back = back;
+    this.blank = blank;
 }
 
 inquirer.prompt(
@@ -59,16 +60,15 @@ inquirer.prompt(
                 name: "clozeDeletion"
             }]
         ).then(function (answers) {
-            console.log("fullText is: ", answers.fullText);
-            console.log("blank bit is: ", answers.clozeDeletion);
-            console.log(answers.fullText.indexOf(answers.clozeDeletion));
             if (answers.fullText.indexOf(answers.clozeDeletion) === -1){
                 console.log("you didn't put in a blank bit that makes sense.");
+                // bmc: need to re-prompt
             }
             else {
                 front = answers.fullText.replace(answers.clozeDeletion, "__________");
                 back = answers. fullText;
-                var myFlashcard = new Flashcard("cloze", front, back);
+                blank = answers.clozeDeletion;
+                var myFlashcard = new Flashcard("cloze", front, back, blank);
 
                 myFlashcard.save();
             }
