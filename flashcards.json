@@ -1,0 +1,12 @@
+[
+  {
+    "type": "starter file"
+  }, 
+{"type":"qa","front":"What is the name of your instructor?","back":"Erick"}, 
+{"type":"qa","front":"Who is the coolest person on earth?","back":"Bon"}, 
+{"type":"qa","front":"Why would you want to learn programming?","back":"Because that's what the cool people do"}, 
+{"type":"cloze","front":"Now is the __________ for all good men...","back":"Now is the time for all good men...","blank":"time"}, 
+{"type":"cloze","front":"Four __________ and seven years ago","back":"Four score and seven years ago","blank":"score"}, 
+{"type":"qa","front":"Does Erick like dogs?","back":"No!"}, 
+{"type":"cloze","front":"Weird Al Yankovic was born in __________, California.","back":"Weird Al Yankovic was born in Lynwood, California.","blank":"Lynwood"}
+]

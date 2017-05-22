@@ -1,128 +1,164 @@
-// bmc: todo print the code and figure out what's going on
-// bmc: todo map out the details on what I have and what I still need
+// bmc: Written by Bon Crowder @MathFour
+
 var inquirer = require('inquirer');
 var fs = require("fs");
+var flashcardJsonFile = "flashcards.json";
 
-inquirer.prompt(
-    {
-        type: "list",
-        message: "Do you want to create flashcards or study?",
-        name: "createOrStudy",
-        choices: ["Create a Flashcard", "Study from Flashcards"]
-    }).then(function (answers) {
+Flashcard.prototype.save = function () {
+    thisString = JSON.stringify(this);
 
-    if (answers.createOrStudy === "Create a Flashcard") {
-        action = "create";
-        console.log("You're creating a flashcard");
-        // bmc: launch the function to prompt for type of flashcard
-        getCardType(handleTheCard, action);
-    }
-    else if (answers.createOrStudy === "Study from Flashcards") {
-        action = "read";
-        console.log("You're viewing a flashcard");
-        // bmc: launch the function to view a random flashcard (or ask which kind they want)
-        getCardType(handleTheCard, action);
-    }
-});
+    fs.readFile(flashcardJsonFile, "utf8", function (error, data) {
+        if (data.indexOf("[") > -1) {
+            newData = data.slice(0, -2);
+            dataToSave = newData + ", \n" + thisString + "\n]";
+            fs.writeFile(flashcardJsonFile, dataToSave, function (error) {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log("The flashcard has been saved!");
+            });
+        }
+        else {
+            console.log("Please include a valid *.json file in this directory per the README.md file at https://github.com/mathfour/flashcard-generator");
+        }
+    });
+};
 
-function Flashcard(front, back, type){
+function Flashcard(type, front, back, blank) {
+    this.type = type;
     this.front = front;
     this.back = back;
-    this.type = type;
-    this.showFront = function (front) {
-        console.log("------------------------------------------");
-        console.log("|                                        |");
-        console.log("|                                        |");
-        console.log("|                                        |");
-        console.log(""
-        console.log("|                                        |");
-        console.log("|                                        |");
-        console.log("|                                        |");
-        console.log("------------------------------------------");
+    this.blank = blank;
+}
+
+function createFlashcard() {
+    inquirer.prompt(
+            {
+                type: "list",
+                message: "What type of flashcard would you like to create?",
+                name: "type",
+                choices: ["Question & Answer", "Fill-in-the-Blank"]
+            }
+    ).then(function (answer) {
+        if (answer.type === "Question & Answer") {
+            getFrontAndBackqa();
+        }
+        else if (answer.type === "Fill-in-the-Blank") {
+            getFrontAndBackcd();
+
+        }
+    });
+}
+
+function readFlashcard() {
+    inquirer.prompt(
+            {
+                type: "list",
+                message: "What type of flashcard would you like to view?",
+                name: "type",
+                choices: ["Question & Answer", "Fill-in-the-Blank"]
+            }
+    ).then(function (answer) {
+        if (answer.type === "Question & Answer") {
+            viewFlashcard("qa");
+        }
+        else if (answer.type === "Fill-in-the-Blank") {
+            viewFlashcard("cloze");
+
+        }
+    });
+}
+
+function viewFlashcard(kind) {
+    fs.readFile("flashcards.json", "utf8", function (error, data) {
+        if (error) {
+            throw error;
+        }
+        else {
+            flashcardInfo = JSON.parse(data);
+            printRandomFlashcard(flashcardInfo, kind);
+        }
+    });}
+
+function getFrontAndBackqa() {
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What's on the front?",
+            name: "front"
+        },
+        {
+            type: "input",
+            message: "What's on the back?",
+            name: "back"
+        }]
+    ).then(function (answers) {
+        var myFlashcard = new Flashcard("qa", answers.front, answers.back);
+        myFlashcard.save();
+    });
+}
+
+function getFrontAndBackcd() {
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What is the full statement?",
+            name: "fullText"
+        },
+        {
+            type: "input",
+            message: "What part should be in the blank?",
+            name: "clozeDeletion"
+        }]
+    ).then(function (answers) {
+        if (answers.fullText.indexOf(answers.clozeDeletion) === -1) {
+            console.log("you didn't put in a blank bit that makes sense.");
+            getFrontAndBackcd();
+        }
+        else {
+            front = answers.fullText.replace(answers.clozeDeletion, "__________");
+            back = answers.fullText;
+            blank = answers.clozeDeletion;
+            var myFlashcard = new Flashcard("cloze", front, back, blank);
+            myFlashcard.save();
+        }
+    })
+}
+
+// bmc: user starts here upon launch
+function promptUserWhatToDo() {
+    inquirer.prompt(
+            {
+                type: "list",
+                message: "What would you like to do?",
+                name: "createOrStudy",
+                choices: ["Create a Flashcard", "Study from Flashcards"]
+            }).then(function (answers) {
+
+        if (answers.createOrStudy === "Create a Flashcard") {
+            createFlashcard();
+        }
+        else if (answers.createOrStudy === "Study from Flashcards") {
+            readFlashcard();
+        }
+    })
+}
+
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function printRandomFlashcard(flashcardInfo, kind) {
+    rand = getRandomIntInclusive(1, flashcardInfo.length);
+    if (flashcardInfo[rand].type === kind) {
+        console.log("The front is:\n", flashcardInfo[rand].front);
+        console.log("The back is:\n", flashcardInfo[rand].back);
+    }
+    else {
+        printRandomFlashcard(flashcardInfo, kind);
     }
 }
 
-Flashcard.prototype.showFront = function () {
-
-    console.log(this.front);
-};
-
-// BasicFlashcard.prototype.showQandA = function () {
-//     console.log(this.question + " " + this.answer);
-// };
-//
-// BasicFlashcard.prototype.showQuestion = function () {
-//     console.log(this.question);
-// }
-//
-// BasicFlashcard.prototype.showAnswer = function () {
-//     console.log(this.answer);
-// }
-
-BasicFlashcard.prototype.saveQandA = function () {
- fs.appendFile("basic-cards.txt", this.question + " " + this.answer, function(err) {
-  if (err) {
-    console.log(err);
-  }
-  else {
-      var flashcard = new Flashcard()
-    console.log("Your flashcard has been saved!");
-  }
-});
-};
-//
-// ClozeFlashcard.prototype.showPartialText = function () {
-//     // bmc: find the deletion in the statement and suck it out
-// };
-//
-// ClozeFlashcard.prototype.showClozeDeletion = function () {
-//     console.log(this.deletion);
-// }
-//
-// ClozeFlashcard.prototype.showFullText = function () {
-//     console.log(this.statement);
-// }
-
-ClozeFlashcard.prototype.saveFullText = function () {
-   fs.appendFile("cloze-cards.txt", this.statement, function (err) {
-      if (err) {
-          console.log(err);
-      }
-      else {
-          console.log("Your flashcard has been saved!");
-      }
-   })
-}
-
-function getCardType(handleTheCard) {
-    inquirer.prompt({
-        type: "list",
-        message: "Q & A cards or Fill-in-the-blank?",
-        name: "cardType",
-        choices: ["Q & A", "Fill-in-the-blank"]
-    }).then(function (answers) {
-        if (answers.cardType === "Q & A") {
-            console.log("you picked QA");
-            cardType = "questionAnswer";
-            questionAnswer(action);
-        }
-        else if (answers.cardType === "Fill-in-the-blank") {
-            console.log("you picked cloze");
-            cardType = "clozeDeleted";
-            clozeDeleted(action);
-        }
-        console.log(cardType);
-    });
-    handleTheCard(action, cardType);
-}
-
-function handleTheCard(action, cardType) {
-   if (action === "read"){
-       // bmc: read the card
-       console.log("you want to read the", cardType, "card.");
-   }
-   else if (action === "create") {
-       // bmc: create the card
-       console.log("you want to create the", cardType, "card.");
-   }
-}
+promptUserWhatToDo();

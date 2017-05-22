@@ -6,3 +6,18 @@
 {"type":"qa","front":"using functions is good right? ","back":"of course!"}
 {"type":"cloze","front":"We should always use __________.","back":"We should always use functions.","blank":"functions"}
 {"type":"cloze","front":"this is the __________ statement","back":"this is the full statement","blank":"full"}
+{"type":"qa","front":"this is the front","back":"this is now the back"}
+{"type":"qa","front":"This is the question, isn't it?","back":"This is the answer for sure!"}
+{"type":"qa","front":"is this the front?","back":"Yup!"}
+{"type":"qa","front":"how about this?","back":"nope!"}
+{"type":"qa","front":"trying the front again","back":"and now the back"}
+{"type":"qa","front":"on the front","back":"on the back"}
+{"type":"qa","front":"now is the front","back":"now back"}
+{"type":"qa","front":"front stuff","back":"back stuff"}
+{"type":"qa","front":"this i the front","back":"this is the back"}
+{"type":"qa","front":"now this is the question 350","back":"and this is the asnwer"}
+{"type":"qa","front":"queestion on 351","back":"answer now"}
+{"type":"qa","front":"question at 353","back":"answer at 353"}
+{"type":"qa","front":"this is the question 356","back":"answer"}
+{"type":"qa","front":"question 428","back":"answer 428"}
+{"type":"qa","front":"front 429","back":"back 429"}
