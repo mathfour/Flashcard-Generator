@@ -7,6 +7,8 @@ Submitted by Bon Crowder
 
 Install appropriate packages (info found in `package.json`) and save `flashcard.js` and `flashcards.json` to the same directory.
  Type `node flashcard.js` at the command line and press enter. You will be prompted to choose `Create a Flashcard` or `Study from Flashcards`.
+ 
+ ![initial prompt](https://github.com/mathfour/flashcard-generator/blob/master/images/Screen%20Shot%202017-05-21%20at%207.40.47%20PM.png?raw=true)
 
 #### If you Create a Flashcard 
   1. You'll be prompted with `What type of flashcard would you like to create?` 
@@ -18,11 +20,15 @@ Install appropriate packages (info found in `package.json`) and save `flashcard.
             ? What is the full statement? Weird Al Yankovic was born in Lynwood, California.
             ? What part should be in the blank? Lynwood
             ```
+![create a flashcard](https://github.com/mathfour/flashcard-generator/blob/master/images/Screen%20Shot%202017-05-21%20at%207.46.17%20PM.png?raw=true)
+
 ####  If you choose to Study from Flashcards
   1. You'll be prompted with `What type of flashcard would you like to view?` 
   2. If you choose `Question & Answer`, you'll be given a random front and back of a Question/Answer card.
   3. If you choose `Fill-in-the-Blank`, you'll be given a random front and back of a Fill-in-the-Blank card.
-  
+
+![viewing flashcards](https://github.com/mathfour/flashcard-generator/blob/master/images/Screen%20Shot%202017-05-21%20at%207.46.35%20PM.png?raw=true)
+
 ### Start from scratch
 
 To create your own set of flashcards, start a blank `*.json` file with the following inside:
@@ -41,6 +47,8 @@ In the `flashcard.js` file, change the name of the `flashcardJsonFile` variable 
 ### Known Bugs
 
 Seems that if the randomizer chooses a question that isn't the right type, you get a weird glitchy error. 
+![glitch](https://github.com/mathfour/flashcard-generator/blob/master/images/Screen%20Shot%202017-05-21%20at%207.45.24%20PM.png?raw=true)
+
 ### What's next
 
 You may have noticed that it's kinda lame to see **both** the question and the answer at the same time. The next step is to separate these so you can actually study.
