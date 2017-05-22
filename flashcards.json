@@ -8,5 +8,7 @@
 {"type":"cloze","front":"Now is the __________ for all good men...","back":"Now is the time for all good men...","blank":"time"}, 
 {"type":"cloze","front":"Four __________ and seven years ago","back":"Four score and seven years ago","blank":"score"}, 
 {"type":"qa","front":"Does Erick like dogs?","back":"No!"}, 
-{"type":"cloze","front":"Weird Al Yankovic was born in __________, California.","back":"Weird Al Yankovic was born in Lynwood, California.","blank":"Lynwood"}
+{"type":"cloze","front":"Weird Al Yankovic was born in __________, California.","back":"Weird Al Yankovic was born in Lynwood, California.","blank":"Lynwood"}, 
+{"type":"qa","front":"What is the index of the first element of an array?","back":"Zero"}, 
+{"type":"cloze","front":"The cheap and dirty way to create a webpage is with __________, but you can use css and Javascript to jazz it up.","back":"The cheap and dirty way to create a webpage is with HTML, but you can use css and Javascript to jazz it up.","blank":"HTML"}
 ]

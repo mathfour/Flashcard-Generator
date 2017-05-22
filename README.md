@@ -38,6 +38,9 @@ Note: there are **NO** spaces after the final square bracket.
 
 In the `flashcard.js` file, change the name of the `flashcardJsonFile` variable on line 5 from `flashcards.json` to the name of your new `*.json` file. 
 
+### Known Bugs
+
+Seems that if the randomizer chooses a question that isn't the right type, you get a weird glitchy error. 
 ### What's next
 
 You may have noticed that it's kinda lame to see **both** the question and the answer at the same time. The next step is to separate these so you can actually study.
