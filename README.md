@@ -14,9 +14,10 @@ Install appropriate packages (info found in `package.json`) and save `flashcard.
   3. If you choose `Fill-in-the-Blank`, you'll be prompted for the full statement then the part that goes in the blank. Press enter after each.
         * For example, if your fill-in-the-blank statement is *Weird Al Yankovik was born in ______, California*, you would enter:
         
-            ```? What is the full statement? Weird Al Yankovic was born in Lynwood, California.
-            ? What part should be in the blank? Lynwood```
-
+            ``` cli
+            ? What is the full statement? Weird Al Yankovic was born in Lynwood, California.
+            ? What part should be in the blank? Lynwood
+            ```
 ####  If you choose to Study from Flashcards
   1. You'll be prompted with `What type of flashcard would you like to view?` 
   2. If you choose `Question & Answer`, you'll be given a random front and back of a Question/Answer card.
@@ -25,7 +26,7 @@ Install appropriate packages (info found in `package.json`) and save `flashcard.
 ### Start from scratch
 
 To create your own set of flashcards, start a blank `*.json` file with the following inside:
-```
+``` json
 [
   {
     "type": "starter file"
@@ -49,3 +50,5 @@ Also, it'd be swell if the app didn't just stop after saving or showing a flashc
 Like it? Use it and say where you got it. 
 
 Have courage and be kind.
+
+![Bon's Signature](http://mathfour.com/wp-content/uploads/2015/06/SignatureBon.png "Bon Crowder")
